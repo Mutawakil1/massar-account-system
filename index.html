@@ -603,62 +603,6 @@
       }
     }
     
-    /* تصميم السلايدر للحد الائتماني */
-    .limit-display {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: var(--accent-color);
-      text-align: center;
-      padding: 8px;
-      background: rgba(49, 130, 206, 0.1);
-      border-radius: 10px;
-      margin: 10px 0;
-      transition: all 0.3s;
-    }
-    
-    .form-range {
-      height: 10px;
-      cursor: pointer;
-      margin: 15px 0;
-    }
-    
-    .form-range::-webkit-slider-thumb {
-      background: var(--gradient-accent);
-      border: none;
-      width: 24px;
-      height: 24px;
-      margin-top: -7px;
-      box-shadow: 0 2px 10px rgba(49, 130, 206, 0.3);
-    }
-    
-    .form-range::-moz-range-thumb {
-      background: var(--gradient-accent);
-      border: none;
-      width: 24px;
-      height: 24px;
-      box-shadow: 0 2px 10px rgba(49, 130, 206, 0.3);
-    }
-    
-    .form-range::-webkit-slider-track {
-      background: #e2e8f0;
-      border-radius: 10px;
-      height: 10px;
-    }
-    
-    .form-range::-moz-range-track {
-      background: #e2e8f0;
-      border-radius: 10px;
-      height: 10px;
-    }
-    
-    .limit-controls {
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 12px;
-      padding: 15px;
-      margin-top: 10px;
-      border: 1px solid var(--border-color);
-    }
-    
     /* تعديلات للشاشات الصغيرة */
     @media (max-width: 768px) {
       .form-container {
@@ -713,15 +657,6 @@
       .section-title {
         font-size: 1.3rem;
       }
-      
-      .limit-controls {
-        padding: 12px;
-      }
-      
-      .form-range::-webkit-slider-thumb {
-        width: 20px;
-        height: 20px;
-      }
     }
     
     @media (max-width: 480px) {
@@ -765,12 +700,6 @@
         radial-gradient(circle at 90% 80%, rgba(56, 161, 105, 0.05) 0%, transparent 20%);
       pointer-events: none;
       z-index: 0;
-    }
-    
-    /* تأثيرات الـ input عند الخطأ */
-    .is-invalid {
-      border-color: var(--danger-color) !important;
-      box-shadow: 0 0 0 4px rgba(229, 62, 62, 0.15) !important;
     }
   </style>
 </head>
@@ -845,44 +774,19 @@
               <div class="col-md-6">
                 <label class="form-label required" id="creditLimitLabel"><i class="fas fa-coins"></i> الحد الائتماني (ريال)</label>
                 <div class="input-group">
-                  <input type="number" 
-                         class="form-control" 
-                         name="الحد الائتماني" 
-                         id="creditLimitInput" 
-                         min="1000" 
-                         max="80000" 
-                         step="1000" 
-                         required
-                         oninput="updateCreditLimitFromInput(this.value)">
+                  <input type="number" class="form-control" name="الحد الائتماني" required>
                   <span class="input-group-text">ر.س</span>
                 </div>
-                <div class="field-note" id="creditLimitNote">المبلغ المطلوب كحد ائتماني (الحد الأقصى: 80,000 ريال)</div>
-                
-                <!-- عناصر التحكم في الحد الائتماني -->
-                <div class="limit-controls">
-                  <div id="currentLimitDisplay" class="limit-display">50,000 ر.س</div>
-                  <input type="range" 
-                         class="form-range" 
-                         id="creditLimitRange" 
-                         min="1000" 
-                         max="80000" 
-                         step="1000" 
-                         value="50000"
-                         oninput="updateCreditLimitFromRange(this.value)">
-                  <div class="d-flex justify-content-between small text-muted mt-2">
-                    <span>1,000 ر.س</span>
-                    <span>80,000 ر.س</span>
-                  </div>
-                </div>
+                <div class="field-note" id="creditLimitNote">المبلغ المطلوب كحد ائتماني</div>
               </div>
               
               <div class="col-md-6">
                 <label class="form-label required" id="paymentPeriodLabel"><i class="fas fa-calendar-alt"></i> فترة السداد</label>
                 <select class="form-select" name="فترة السداد" required>
                   <option value="" selected disabled id="selectPeriodOption">اختر فترة السداد</option>
-                  <option value="15 يوم">15 يوم</option>
                   <option value="30 يوم">30 يوم</option>
-                  <option value="45 يوم">45 يوم</option>
+                  <option value="60 يوم">60 يوم</option>
+                  <option value="90 يوم">90 يوم</option>
                 </select>
               </div>
               
@@ -907,7 +811,7 @@
               </div>
               <div class="col-md-6">
                 <label class="form-label required" id="nationalityLabel"><i class="fas fa-globe"></i> الجنسية</label>
-                <input type="text" class="form-control" name="الجنسية" required placeholder=" ">
+                <input type="text" class="form-control" name="الجنسية" required placeholder="مثال: سعودي">
                 <div class="field-note" id="nationalityNote">جنسية الشخص المسؤول</div>
               </div>
               
@@ -961,15 +865,6 @@
               <p class="text-muted mb-2" id="idPhotoNote">انقر لرفع صورة الهوية أو الإقامة (JPG, PNG, PDF)</p>
               <input type="file" class="d-none" id="idPhoto" accept=".jpg,.jpeg,.png,.pdf" required>
               <div id="idFileInfo" class="mt-2"></div>
-            </div>
-
-            <!-- المستند 4 -->
-            <div class="file-upload-box" onclick="document.getElementById('otherFiles').click()">
-              <i class="fas fa-file-archive fa-3x mb-3" style="color: var(--accent-color);"></i>
-              <h5 id="otherFilesLabel">ملفات أخرى</h5>
-              <p class="text-muted mb-2" id="otherFilesNote">انقر لرفع ملفات أخرى (PDF, JPG, PNG) - اختياري</p>
-              <input type="file" class="d-none" id="otherFiles" accept=".pdf,.jpg,.jpeg,.png">
-              <div id="otherFileInfo" class="mt-2"></div>
             </div>
           </div>
           
@@ -1034,10 +929,10 @@
     let autoResetTimer = null;
     let selectedBranches = [];
     
-    // بيانات الفروع - خمسة فروع
+    // بيانات الفروع - أربعة فروع فقط كما في الأصل
     const branchesData = {
-      'ar': ['ينبع', 'املج', 'ضباء', 'حقل', 'الوجه'],
-      'en': ['Yanbu', 'Amluj', 'Duba', 'Haql', 'Alwjh']
+      'ar': ['ينبع', 'املج', 'ضباء', 'حقل'],
+      'en': ['Yanbu', 'AlUla', 'Duba', 'Haql']
     };
     
     // ========== تحسينات خاصة بالجوال ==========
@@ -1063,7 +958,7 @@
       phoneLabel: "رقم الهاتف",
       phoneNote: "رقم الهاتف الأرضي للشركة",
       creditLimitLabel: "الحد الائتماني (ريال)",
-      creditLimitNote: "المبلغ المطلوب كحد ائتماني (الحد الأقصى: 80,000 ريال)",
+      creditLimitNote: "المبلغ المطلوب كحد ائتماني",
       paymentPeriodLabel: "فترة السداد",
       selectPeriodOption: "اختر فترة السداد",
       branchesLabel: "الفروع المراد التعامل معها",
@@ -1084,8 +979,6 @@
       commercialRegisterNote: "انقر لرفع السجل التجاري (PDF, JPG, PNG)",
       idPhotoLabel: "صورة شخصية للمفوض أو صورة الإقامة",
       idPhotoNote: "انقر لرفع صورة الهوية أو الإقامة (JPG, PNG, PDF)",
-      otherFilesLabel: "ملفات أخرى",
-      otherFilesNote: "انقر لرفع ملفات أخرى (PDF, JPG, PNG) - اختياري",
       submitBtnText: "إرسال طلب فتح الحساب",
       clearFormBtnText: "مسح النموذج",
       successTitle: "تم حفظ الطلب بنجاح!",
@@ -1118,7 +1011,7 @@
       phoneLabel: "Phone Number",
       phoneNote: "Company landline number",
       creditLimitLabel: "Credit Limit (SAR)",
-      creditLimitNote: "Required credit limit amount (Maximum: 80,000 SAR)",
+      creditLimitNote: "Required credit limit amount",
       paymentPeriodLabel: "Payment Period",
       selectPeriodOption: "Select Payment Period",
       branchesLabel: "Branches to Deal With",
@@ -1139,8 +1032,6 @@
       commercialRegisterNote: "Click to upload commercial register (PDF, JPG, PNG)",
       idPhotoLabel: "Authorized Person Photo or Residence Copy",
       idPhotoNote: "Click to upload ID or residence photo (JPG, PNG, PDF)",
-      otherFilesLabel: "Other Files",
-      otherFilesNote: "Click to upload other files (PDF, JPG, PNG) - Optional",
       submitBtnText: "Submit Account Opening Request",
       clearFormBtnText: "Clear Form",
       successTitle: "Request Saved Successfully!",
@@ -1239,9 +1130,6 @@
       // تعيين اللغة الافتراضية
       switchLanguage('ar');
       
-      // تهيئة الحد الائتماني
-      updateLimitDisplay(50000);
-      
       // رسالة ترحيبية
       setTimeout(() => {
         Swal.fire({
@@ -1255,78 +1143,6 @@
         });
       }, 800);
     });
-    
-    // ========== دوال التحكم في الحد الائتماني ==========
-    function updateCreditLimitFromInput(value) {
-      const range = document.getElementById('creditLimitRange');
-      const display = document.getElementById('currentLimitDisplay');
-      const input = document.getElementById('creditLimitInput');
-      
-      // التأكد من أن القيمة ضمن المدى
-      value = Math.min(80000, Math.max(1000, value));
-      
-      // تحديث السلايدر
-      range.value = value;
-      
-      // تحديث العرض
-      updateLimitDisplay(value);
-      
-      // التحقق من الحد الأقصى
-      if (value == 80000) {
-        showMaxLimitAlert();
-        input.classList.add('is-invalid');
-      } else {
-        input.classList.remove('is-invalid');
-      }
-      
-      // تحديث قيمة حقل الإدخال
-      input.value = value;
-    }
-    
-    function updateCreditLimitFromRange(value) {
-      const input = document.getElementById('creditLimitInput');
-      
-      // تحديث حقل الإدخال
-      input.value = value;
-      
-      // تحديث العرض
-      updateLimitDisplay(value);
-      
-      // التحقق من الحد الأقصى
-      if (value == 80000) {
-        showMaxLimitAlert();
-        input.classList.add('is-invalid');
-      } else {
-        input.classList.remove('is-invalid');
-      }
-    }
-    
-    function updateLimitDisplay(value) {
-      const display = document.getElementById('currentLimitDisplay');
-      const formattedValue = new Intl.NumberFormat('ar-SA').format(value);
-      display.textContent = formattedValue + (currentLanguage === 'ar' ? ' ر.س' : ' SAR');
-      
-      // تغيير اللون عند الوصول للحد الأقصى
-      if (value == 80000) {
-        display.style.color = 'var(--danger-color)';
-        display.style.background = 'rgba(229, 62, 62, 0.1)';
-      } else if (value >= 60000) {
-        display.style.color = 'var(--warning-color)';
-        display.style.background = 'rgba(237, 137, 54, 0.1)';
-      } else {
-        display.style.color = 'var(--accent-color)';
-        display.style.background = 'rgba(49, 130, 206, 0.1)';
-      }
-    }
-    
-    function showMaxLimitAlert() {
-      const noteElement = document.getElementById('creditLimitNote');
-      if (currentLanguage === 'ar') {
-        noteElement.innerHTML = '<span style="color: var(--danger-color); font-weight: bold;">⚠️ وصلت للحد الأقصى (80,000 ريال)</span>';
-      } else {
-        noteElement.innerHTML = '<span style="color: var(--danger-color); font-weight: bold;">⚠️ Reached maximum limit (80,000 SAR)</span>';
-      }
-    }
     
     // تبديل اللغة
     function switchLanguage(lang) {
@@ -1362,40 +1178,6 @@
       
       // تحديث أزرار الفروع
       updateBranchesButtons();
-      
-      // تحديث عرض الحد الائتماني
-      const currentValue = document.getElementById('creditLimitInput').value;
-      updateLimitDisplay(currentValue);
-    }
-    
-    // تحديث خيارات فترة السداد
-    function updatePaymentPeriodOptions(lang) {
-      const selectElement = document.querySelector('select[name="فترة السداد"]');
-      const currentValue = selectElement.value;
-      
-      // تنظيف الخيارات الحالية
-      selectElement.innerHTML = '';
-      
-      if (lang === 'ar') {
-        selectElement.innerHTML = `
-          <option value="" selected disabled>اختر فترة السداد</option>
-          <option value="15 يوم">15 يوم</option>
-          <option value="30 يوم">30 يوم</option>
-          <option value="45 يوم">45 يوم</option>
-        `;
-      } else {
-        selectElement.innerHTML = `
-          <option value="" selected disabled>Select Payment Period</option>
-          <option value="15 يوم">15 Days</option>
-          <option value="30 يوم">30 Days</option>
-          <option value="45 يوم">45 Days</option>
-        `;
-      }
-      
-      // استعادة القيمة المختارة
-      if (currentValue) {
-        selectElement.value = currentValue;
-      }
     }
     
     // إعداد أزرار اختيار الفروع
@@ -1441,6 +1223,44 @@
       }
     }
     
+    // تحديث خيارات فترة السداد
+    function updatePaymentPeriodOptions(lang) {
+      const selectElement = document.querySelector('select[name="فترة السداد"]');
+      const currentValue = selectElement.value;
+      
+      const periodOptions = {
+        'ar': {
+          '': lang === 'ar' ? 'اختر فترة السداد' : 'Select Payment Period',
+          '30 يوم': '30 يوم',
+          '60 يوم': '60 يوم', 
+          '90 يوم': '90 يوم'
+        },
+        'en': {
+          '': 'Select Payment Period',
+          '30 يوم': '30 Days',
+          '60 يوم': '60 Days',
+          '90 يوم': '90 Days'
+        }
+      };
+      
+      const options = periodOptions[lang];
+      selectElement.innerHTML = '';
+      
+      // إضافة الخيارات
+      for (const [value, text] of Object.entries(options)) {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = text;
+        if (value === '') {
+          option.disabled = true;
+          option.selected = true;
+        } else if (value === currentValue) {
+          option.selected = true;
+        }
+        selectElement.appendChild(option);
+      }
+    }
+    
     // إعداد رفع الملفات
     function setupFileUploads() {
       // المستند 1: الشهادة الضريبية
@@ -1467,15 +1287,6 @@
           handleMobileFileUpload(this, 'idFileInfo', currentLanguage === 'ar' ? 'صورة شخصية للمفوض او صورة الاقامة' : 'Authorized Person Photo or Residence Copy');
         } else {
           handleFileUpload(this, 'idFileInfo', currentLanguage === 'ar' ? 'صورة شخصية للمفوض او صورة الاقامة' : 'Authorized Person Photo or Residence Copy');
-        }
-      });
-      
-      // المستند 4: ملفات أخرى
-      document.getElementById('otherFiles').addEventListener('change', function(e) {
-        if (isMobileDevice) {
-          handleMobileFileUpload(this, 'otherFileInfo', currentLanguage === 'ar' ? 'ملفات أخرى' : 'Other Files');
-        } else {
-          handleFileUpload(this, 'otherFileInfo', currentLanguage === 'ar' ? 'ملفات أخرى' : 'Other Files');
         }
       });
     }
@@ -1784,22 +1595,6 @@
         
         if (isSubmitting) return;
         
-        // التحقق من الحد الائتماني
-        const creditLimit = parseInt(document.getElementById('creditLimitInput').value);
-        if (creditLimit > 80000) {
-          Swal.fire({
-            icon: 'error',
-            title: currentLanguage === 'ar' ? 'تجاوز الحد المسموح' : 'Limit Exceeded',
-            text: currentLanguage === 'ar' ? 
-              'الحد الائتماني لا يمكن أن يتجاوز 80,000 ريال' :
-              'Credit limit cannot exceed 80,000 SAR',
-            confirmButtonText: currentLanguage === 'ar' ? 'حسناً' : 'OK',
-            background: 'var(--light-bg)',
-            color: 'var(--secondary-color)'
-          });
-          return;
-        }
-        
         // التحقق من الملفات المطلوبة
         const requiredFiles = [
           currentLanguage === 'ar' ? 'صورة الشهادة الضريبية' : 'Tax Certificate Copy',
@@ -1862,9 +1657,7 @@
           
           // تحويل الملفات إلى Base64
           for (const [fieldName, file] of Object.entries(uploadedFiles)) {
-            if (file) {
-              textData[fieldName] = await fileToBase64(file);
-            }
+            textData[fieldName] = await fileToBase64(file);
           }
           
           // إرسال البيانات
@@ -1968,17 +1761,10 @@
       document.getElementById('taxFileInfo').innerHTML = '';
       document.getElementById('commercialFileInfo').innerHTML = '';
       document.getElementById('idFileInfo').innerHTML = '';
-      document.getElementById('otherFileInfo').innerHTML = '';
       uploadedFiles = {};
       
       // إعادة تعيين اسم الشركة
       document.querySelector('input[name="الاسم التجاري / اسم العميل"]').value = "شركة مسار الإعمار";
-      
-      // إعادة تعيين الحد الائتماني
-      document.getElementById('creditLimitInput').value = '50000';
-      document.getElementById('creditLimitRange').value = '50000';
-      updateLimitDisplay(50000);
-      document.getElementById('creditLimitInput').classList.remove('is-invalid');
       
       // إعادة تعيين الفروع المختارة
       selectedBranches = [];
@@ -1991,11 +1777,6 @@
         '<i class="fas fa-paper-plane"></i> إرسال طلب فتح الحساب' : 
         '<i class="fas fa-paper-plane"></i> Submit Account Opening Request';
       isSubmitting = false;
-      
-      // إعادة تعيين ملاحظة الحد الائتماني
-      document.getElementById('creditLimitNote').innerHTML = currentLanguage === 'ar' ? 
-        'المبلغ المطلوب كحد ائتماني (الحد الأقصى: 80,000 ريال)' :
-        'Required credit limit amount (Maximum: 80,000 SAR)';
       
       // رسالة تأكيد
       Swal.fire({
@@ -2034,9 +1815,6 @@
       document.querySelector('input[name="رقم الهوية / الاقامة"]').value = "1234567890";
       document.querySelector('input[name="رقم الجوال"]').value = "0551234567";
       
-      // تحديث سلايدر الحد الائتماني
-      updateCreditLimitFromInput(50000);
-      
       // اختيار فروع عشوائية للاختبار
       const branches = branchesData[currentLanguage];
       selectedBranches = [branches[0], branches[1]]; // اختيار أول فرعين
@@ -2054,4 +1832,4 @@
     };
   </script>
 </body>
-</html>
+</html> اريد تعديل الاسم بالانجليزي لفرع املج ليكون Amluj واضافة فرع جديد باسم الواجهة دون اجراء اي تعديل اخر على الكود
