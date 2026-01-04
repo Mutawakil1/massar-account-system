@@ -784,9 +784,9 @@
                 <label class="form-label required" id="paymentPeriodLabel"><i class="fas fa-calendar-alt"></i> فترة السداد</label>
                 <select class="form-select" name="فترة السداد" required>
                   <option value="" selected disabled id="selectPeriodOption">اختر فترة السداد</option>
+                  <option value="15 يوم">15 يوم</option>
                   <option value="30 يوم">30 يوم</option>
-                  <option value="60 يوم">60 يوم</option>
-                  <option value="90 يوم">90 يوم</option>
+                  <option value="45 يوم">45 يوم</option>
                 </select>
               </div>
               
@@ -811,7 +811,7 @@
               </div>
               <div class="col-md-6">
                 <label class="form-label required" id="nationalityLabel"><i class="fas fa-globe"></i> الجنسية</label>
-                <input type="text" class="form-control" name="الجنسية" required placeholder="مثال: سعودي">
+                <input type="text" class="form-control" name="الجنسية" required placeholder=" ">
                 <div class="field-note" id="nationalityNote">جنسية الشخص المسؤول</div>
               </div>
               
@@ -863,6 +863,16 @@
               <i class="fas fa-id-card fa-3x mb-3" style="color: var(--accent-color);"></i>
               <h5 class="required" id="idPhotoLabel">صورة شخصية للمفوض أو صورة الإقامة</h5>
               <p class="text-muted mb-2" id="idPhotoNote">انقر لرفع صورة الهوية أو الإقامة (JPG, PNG, PDF)</p>
+              <input type="file" class="d-none" id="idPhoto" accept=".jpg,.jpeg,.png,.pdf" required>
+              <div id="idFileInfo" class="mt-2"></div>
+            </div>
+          </div>
+
+            <!-- المستند 4 -->
+            <div class="file-upload-box" onclick="document.getElementById('idPhoto').click()">
+              <i class="fas fa-id-card fa-3x mb-3" style="color: var(--accent-color);"></i>
+              <h5 class="required" id="idPhotoLabel">ملفات أخرى</h5>
+              <p class="text-muted mb-2" id="idPhotoNote">انقر لرفع ملفات أخرى (JPG, PNG, PDF)</p>
               <input type="file" class="d-none" id="idPhoto" accept=".jpg,.jpeg,.png,.pdf" required>
               <div id="idFileInfo" class="mt-2"></div>
             </div>
@@ -932,8 +942,8 @@
     // بيانات الفروع - أربعة فروع فقط كما في الأصل
    // بيانات الفروع - خمسة فروع بعد الإضافة
 const branchesData = {
-  'ar': ['ينبع', 'املج', 'ضباء', 'حقل', 'الوجهة'],
-  'en': ['Yanbu', 'Amluj', 'Duba', 'Haql', 'Alwjha']
+  'ar': ['ينبع', 'املج', 'ضباء', 'حقل', 'الوجه'],
+  'en': ['Yanbu', 'Amluj', 'Duba', 'Haql', 'Alwjh']
 };
     
     // ========== تحسينات خاصة بالجوال ==========
